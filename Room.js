@@ -16,6 +16,9 @@ class Room{
     getPlayerNo(){
         return this.Players.length
     }
+    getPlayerByID(socketID){
+        return this.Players.find(p=>p.getsocketID()===socketID)
+    }
 
 }
 

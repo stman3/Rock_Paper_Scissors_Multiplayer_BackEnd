@@ -9,6 +9,9 @@ class Player{
     getPlayer(){
         return Player
     }
+    getsocketID(){
+        return(this.socketID)
+    }
 }
 
 

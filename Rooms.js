@@ -29,6 +29,12 @@ class Rooms{
     getRoom(RoomNumber){
         return this.rooms.find(r=>r.getRoomNO()===RoomNumber)
     }
+
+    getRoomByID(socketID){
+        console.log("find room")
+        return this.rooms.find(r=>r.getPlayerByID(socketID).getsocketID()===socketID)
+    }
+
    
 }
 
