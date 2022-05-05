@@ -35,10 +35,10 @@ io.on('connection',(socket)=>{
         const playerj = roomJ.Players.find(p=>p.socketID===socket.id)
         console.log(roomJ.Players)
         setTimeout(() => {
-           socket.emit("getplayer",JSON.stringify(playerj))
+           socket.emit("getplayer",playerj)
         }, 500);
         setTimeout(() => {
-        io.in(data.newPlayer.roomNo).emit("PlayerRoomNo",JSON.stringify(roomJ))
+        io.in(data.newPlayer.roomNo).emit("PlayerRoomNo",roomJ)
     }, 500);
     })
 
