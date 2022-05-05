@@ -28,8 +28,7 @@ io.on('connection',(socket)=>{
     })
 
     socket.on("join_room",(data)=>{
-        console.log(`user ${socket.id} is trying to join Room number ${data.newPlayer.playerRoom}`)
-
+        rooms.joinRoom(data.newPlayer.roomNo,socket.id,data.newPlayer.PlayerName,data.newPlayer.playerPoint)
     })
 
 

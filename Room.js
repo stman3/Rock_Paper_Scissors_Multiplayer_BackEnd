@@ -3,7 +3,6 @@ class Room{
     constructor(roomNo){
         this.roomNo=roomNo
         this.Players=[]
-        console.log(`room have been resive with number: ${roomNo}`)
     }
     
     getRoomNO(){

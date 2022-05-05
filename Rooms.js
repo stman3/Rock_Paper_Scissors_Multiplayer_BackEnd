@@ -6,20 +6,20 @@ class Rooms{
     }
 
 
-    joinRoom(RoomNumber,socketID,PlayerName,playerRank,playerPoint){
+    joinRoom(RoomNumber,socketID,PlayerName,playerPoint){
         if(this.rooms.some(r=>r.getRoomNO()===RoomNumber)){
             const room = this.rooms.find(r=>r.getRoomNO()===RoomNumber)
-            room.addPlayer(socketID,PlayerName,playerRank,playerPoint)
+            room.addPlayer(socketID,PlayerName,"player",playerPoint)
         }
         else{
-            this.createRoom(socketID,RoomNumber,PlayerName,playerRank,playerPoint)
+            this.createRoom(socketID,RoomNumber,PlayerName,playerPoint)
         }
     }
 
-    createRoom(RoomNumber,PlayerName,playerRank,playerPoint){
+    createRoom(socketID,RoomNumber,PlayerName,playerPoint){
         this.rooms.push(new Room(RoomNumber))
         const room = this.rooms.find(r=>r.getRoomNO()===RoomNumber)
-        room.addPlayer(socketID,PlayerName,playerRank,playerPoint)
+        room.addPlayer(socketID,PlayerName,"admin",playerPoint)
     }
 
     getRoomsNumber(){
