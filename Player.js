@@ -10,7 +10,7 @@ class Player{
         return Player
     }
     getsocketID(){
-        return(this.socketID)
+        return this.socketID
     }
 }
 

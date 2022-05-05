@@ -30,19 +30,25 @@ io.on('connection',(socket)=>{
     socket.on("join_room",(data)=>{
         socket.join(data.newPlayer.roomNo)
         rooms.joinRoom(data.newPlayer.roomNo,socket.id,data.newPlayer.PlayerName,data.newPlayer.playerPoint)
-        const playerroom= rooms.getRoomByID(socket.id)
-        
+
+        const roomJ= rooms.getRoom(data.newPlayer.roomNo)
+        const playerj = roomJ.Players.find(p=>p.socketID===socket.id)
+        console.log(roomJ.Players)
+        setTimeout(() => {
+           socket.emit("getplayer",JSON.stringify(playerj))
+        }, 500);
+        setTimeout(() => {
+        io.in(data.newPlayer.roomNo).emit("PlayerRoomNo",JSON.stringify(roomJ))
+    }, 500);
     })
 
     socket.on("disconnect",()=>{
         console.log(`socket ${socket.id} disconnected`)
         clientNo--
+        socket.broadcast.emit("GetPlayerCount",clientNo)
     })
 
-    socket.emit("GetPlayerCount",clientNo)
-    socket.on("PlayerRoomNob",(data,cb)=>{
-        socket.to(socket.id).emit()
-    }) 
+    io.emit("GetPlayerCount",clientNo)
     
     
 })
