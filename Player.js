@@ -1,5 +1,6 @@
 class Player{
-    constructor(PlayerName,playerRank,playerPoint){
+    constructor(socketID,PlayerName,playerRank,playerPoint){
+        this.socketID=socketID
         this.PlayerName=PlayerName
         this.playerRank=playerRank
         this.playerPoint=playerPoint

@@ -10,8 +10,8 @@ class Room{
         return this.roomNo
     }
 
-    addPlayer(PlayerName,playerRank,playerPoint){
-        this.Players.push(new Player(PlayerName,playerRank,playerPoint))
+    addPlayer(socketID,PlayerName,playerRank,playerPoint){
+        this.Players.push(new Player(socketID,PlayerName,playerRank,playerPoint))
     }
 
     getPlayerNo(){
