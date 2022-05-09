@@ -12,6 +12,9 @@ class Player{
     getsocketID(){
         return this.socketID
     }
+    setPlayerRank(rank){
+        this.playerRank = rank
+    }
 }
 
 

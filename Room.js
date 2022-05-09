@@ -23,12 +23,11 @@ class Room{
     deleatePlayerByID(SocketID){
         const player = this.getPlayerByID(SocketID)
         if(player.playerRank==="admin"){
-            this.Players.filter(p=> p.getsocketID()!==SocketID)
-            this.Players[0].playerRank="admin"
-            console.log(this.Players)
+            console.log(this.Players[0])
+           this.Players =this.Players.filter(p=> p.getsocketID()!==SocketID)
         }
         else{
-            this.Players.filter(p=> p.socketID!==SocketID)
+            this.Players= this.Players.filter(p=> p.getsocketID()!==SocketID)
             console.log(this.Players)
         }
     }
