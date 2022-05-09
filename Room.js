@@ -20,6 +20,19 @@ class Room{
         return this.Players.find(p=>p.getsocketID()===socketID)
     }
 
+    deleatePlayerByID(SocketID){
+        const player = this.getPlayerByID(SocketID)
+        if(player.playerRank==="admin"){
+            this.Players.filter(p=> p.getsocketID()!==SocketID)
+            this.Players[0].playerRank="admin"
+            console.log(this.Players)
+        }
+        else{
+            this.Players.filter(p=> p.socketID!==SocketID)
+            console.log(this.Players)
+        }
+    }
+
 }
 
 

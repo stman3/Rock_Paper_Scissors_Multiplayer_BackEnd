@@ -38,13 +38,21 @@ io.on('connection',(socket)=>{
            socket.emit("getplayer",playerj)
         }, 500);
         setTimeout(() => {
-        io.in(data.newPlayer.roomNo).emit("PlayerRoomNo",roomJ)
+        io.in(data.newPlayer.roomNo).emit("PlayerRoom",roomJ)
     }, 500);
     })
 
     socket.on("disconnect",()=>{
         console.log(`socket ${socket.id} disconnected`)
         clientNo--
+        if(rooms.getRoomByID(socket.id)){
+            const roomno = rooms.getRoomByID(socket.id).getRoomNO()
+            console.log(`the room number on disconnect is: ${roomno}`)
+            rooms.deleatePlayerByIDfromRoom(socket.id)
+            setTimeout(() => {
+            io.in(roomno).emit("PlayerRoom",rooms.getRoom(roomno))
+        }, 500);
+        }
         socket.broadcast.emit("GetPlayerCount",clientNo)
     })
 

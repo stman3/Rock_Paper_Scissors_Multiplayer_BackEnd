@@ -31,9 +31,17 @@ class Rooms{
     }
 
     getRoomByID(socketID){
-        console.log("find room")
         return this.rooms.find(r=>r.getPlayerByID(socketID).getsocketID()===socketID)
     }
+
+    deleatePlayerByIDfromRoom(socketID){
+        const room =this.getRoomByID(socketID)
+        room.deleatePlayerByID(socketID)
+        if(room.getPlayerNo()===0){
+            this.rooms.filter(r=>r.getRoomNO()!==room.getRoomNO())
+        }
+    }
+    
 
    
 }
