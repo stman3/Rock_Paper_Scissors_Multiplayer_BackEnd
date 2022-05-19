@@ -41,7 +41,12 @@ class Rooms{
             this.rooms.filter(r=>r.getRoomNO()!==room.getRoomNO())
         }
     }
-    
+
+    deleteRoom(RoomNumber){
+        this.rooms = this.rooms.filter(r=>r.getRoomNO()!==RoomNumber)
+    }
+
+ 
 
    
 }

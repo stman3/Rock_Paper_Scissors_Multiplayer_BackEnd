@@ -30,7 +30,6 @@ io.on('connection',(socket)=>{
     socket.on("join_room",(data)=>{
         socket.join(data.newPlayer.roomNo)
         rooms.joinRoom(data.newPlayer.roomNo,socket.id,data.newPlayer.PlayerName,data.newPlayer.playerPoint)
-
         const roomJ= rooms.getRoom(data.newPlayer.roomNo)
         const playerj = roomJ.Players.find(p=>p.socketID===socket.id)
         console.log(roomJ.Players)
@@ -45,14 +44,23 @@ io.on('connection',(socket)=>{
     socket.on("disconnect",()=>{
         console.log(`socket ${socket.id} disconnected`)
         clientNo--
+        console.log()
         if(rooms.getRoomByID(socket.id)){
-            const roomno = rooms.getRoomByID(socket.id).getRoomNO()
-            console.log(`the room number on disconnect is: ${roomno}`)
-            rooms.deleatePlayerByIDfromRoom(socket.id)
-            setTimeout(() => {
-            io.in(roomno).emit("PlayerRoom",rooms.getRoom(roomno))
-        }, 500);
+            const roomno = rooms.getRoomByID(socket.id)
+            
+            console.log(`the room number on disconnect is: ${roomno.getRoomNO()} and the numbmer of player ${roomno.getPlayerNo()}`)
+            if(roomno.getPlayerNo()===1){
+                rooms.deleteRoom(roomno.getRoomNO())
+            }else{
+                rooms.deleatePlayerByIDfromRoom(socket.id)
+                setTimeout(() => {
+                io.in(roomno).emit("PlayerRoom",roomno)
+            }, 500);
+            }
+
+            socket.leave(roomno.getRoomNO())
         }
+        
         socket.broadcast.emit("GetPlayerCount",clientNo)
     })
 
