@@ -16,6 +16,9 @@ class Player{
     setPlayerRank(rank){
         this.playerRank = rank
     }
+    getPlayerRank(){
+        return this.playerRank
+    }
 }
 
 

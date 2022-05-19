@@ -33,14 +33,12 @@ io.on('connection',(socket)=>{
         const roomJ= rooms.getRoom(data.newPlayer.roomNo)
         const playerj = roomJ.Players.find(p=>p.socketID===socket.id)
         console.log(roomJ.Players)
-        setTimeout(() => {
-           socket.emit("getplayer",playerj)
-        }, 500);
-        setTimeout(() => {
-        io.in(data.newPlayer.roomNo).emit("PlayerRoom",roomJ)
-    }, 500);
-    })
 
+        socket.emit("getplayer",playerj)
+
+        io.in(data.newPlayer.roomNo).emit("PlayerRoom",roomJ)
+
+    })
 
 
 
@@ -48,19 +46,20 @@ io.on('connection',(socket)=>{
     socket.on("disconnect",()=>{
         console.log(`socket ${socket.id} disconnected`)
         clientNo--
-        console.log()
+        
         if(rooms.getRoomByID(socket.id)){
             const roomno = rooms.getRoomByID(socket.id)
             
             console.log(`the room number on disconnect is: ${roomno.getRoomNO()} and the numbmer of player ${roomno.getPlayerNo()}`)
             if(roomno.getPlayerNo()===1){
+                console.log("insed if one player")
                 rooms.deleteRoom(roomno.getRoomNO())
             }else{
                 rooms.deleatePlayerByIDfromRoom(socket.id)
-                setTimeout(() => {
-                io.in(roomno).emit("PlayerRoom",roomno)
-            }, 500);
+                io.in(roomno.getRoomNO()).emit("PlayerRoom",roomno)
+         
             }
+            
 
             socket.leave(roomno.getRoomNO())
         }
