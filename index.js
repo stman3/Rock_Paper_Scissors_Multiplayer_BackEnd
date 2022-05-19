@@ -29,7 +29,7 @@ io.on('connection',(socket)=>{
 
     socket.on("join_room",(data)=>{
         socket.join(data.newPlayer.roomNo)
-        rooms.joinRoom(data.newPlayer.roomNo,socket.id,data.newPlayer.PlayerName,data.newPlayer.playerPoint)
+        rooms.joinRoom(data.newPlayer.roomNo,socket.id,data.newPlayer.PlayerName,data.newPlayer.playerPoint,data.newPlayer.playerState)
         const roomJ= rooms.getRoom(data.newPlayer.roomNo)
         const playerj = roomJ.Players.find(p=>p.socketID===socket.id)
         console.log(roomJ.Players)
@@ -40,6 +40,10 @@ io.on('connection',(socket)=>{
         io.in(data.newPlayer.roomNo).emit("PlayerRoom",roomJ)
     }, 500);
     })
+
+
+
+
 
     socket.on("disconnect",()=>{
         console.log(`socket ${socket.id} disconnected`)

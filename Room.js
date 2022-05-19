@@ -1,16 +1,17 @@
 const Player =require('./Player')
 class Room{
-    constructor(roomNo){
+    constructor(roomNo,RoomState){
         this.roomNo=roomNo
         this.Players=[]
+        this.RoomState=RoomState
     }
     
     getRoomNO(){
         return this.roomNo
     }
 
-    addPlayer(socketID,PlayerName,playerRank,playerPoint){
-        this.Players.push(new Player(socketID,PlayerName,playerRank,playerPoint))
+    addPlayer(socketID,PlayerName,playerRank,playerPoint,playerState){
+        this.Players.push(new Player(socketID,PlayerName,playerRank,playerPoint,playerState))
     }
 
     getPlayerNo(){
