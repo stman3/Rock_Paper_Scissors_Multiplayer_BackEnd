@@ -37,6 +37,7 @@ class Rooms{
     deleatePlayerByIDfromRoom(socketID){
         const room =this.getRoomByID(socketID)
         room.deleatePlayerByID(socketID)
+        //check if this line is needed
         if(room.getPlayerNo()===0){
             this.rooms.filter(r=>r.getRoomNO()!==room.getRoomNO())
         }

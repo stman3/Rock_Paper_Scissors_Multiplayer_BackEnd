@@ -59,8 +59,7 @@ io.on('connection',(socket)=>{
                 io.in(roomno.getRoomNO()).emit("PlayerRoom",roomno)
          
             }
-            
-
+            //check if the this line is need it 
             socket.leave(roomno.getRoomNO())
         }
         
