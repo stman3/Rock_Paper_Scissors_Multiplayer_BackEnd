@@ -33,7 +33,6 @@ io.on('connection',(socket)=>{
         const roomJ= rooms.getRoom(data.newPlayer.roomNo)
         const playerj = roomJ.Players.find(p=>p.socketID===socket.id)
         console.log(roomJ.Players)
-
         socket.emit("getplayer",playerj)
 
         io.in(data.newPlayer.roomNo).emit("PlayerRoom",roomJ)
@@ -52,7 +51,6 @@ io.on('connection',(socket)=>{
             
             console.log(`the room number on disconnect is: ${roomno.getRoomNO()} and the numbmer of player ${roomno.getPlayerNo()}`)
             if(roomno.getPlayerNo()===1){
-                console.log("insed if one player")
                 rooms.deleteRoom(roomno.getRoomNO())
             }else{
                 rooms.deleatePlayerByIDfromRoom(socket.id)

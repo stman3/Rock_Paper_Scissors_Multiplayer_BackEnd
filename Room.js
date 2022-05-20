@@ -24,7 +24,6 @@ class Room{
     deleatePlayerByID(SocketID){
         const player = this.getPlayerByID(SocketID)
         if(player.playerRank==="admin"){
-            console.log(this.Players[0].getPlayerRank())
            this.Players =this.Players.filter(p=> p.getsocketID()!==SocketID)
            this.Players[0].setPlayerRank("admin")
         }
