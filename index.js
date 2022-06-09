@@ -23,9 +23,6 @@ const io = new Server(server,{
 io.on('connection',(socket)=>{
     console.log(`User connected: ${socket.id}`)
     clientNo++
-    socket.on('send_message',(data)=>{
-        socket.broadcast.emit('receive_message',data)
-    })
 
     socket.on("join_room",(data)=>{
         socket.join(data.newPlayer.roomNo)
@@ -39,7 +36,10 @@ io.on('connection',(socket)=>{
 
     })
 
-
+    socket.on('send_message',(data)=>{
+        console.log(`Send_Message the messge is ${data.Message} to the room number ${data.PlayerRoomNo}`)
+        io.in(data.PlayerRoomNo).emit("receive_message",data)
+    })
 
 
     socket.on("disconnect",()=>{
