@@ -19,6 +19,12 @@ class Player{
     getPlayerRank(){
         return this.playerRank
     }
+    getPlayerState(){
+        return this.playerState
+    }
+    ChangePlayerState(){
+        this.playerState=!this.playerState
+    }
 }
 
 

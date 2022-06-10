@@ -36,6 +36,12 @@ io.on('connection',(socket)=>{
 
     })
 
+    socket.on('Send_State',(data)=>{
+        const roomJ = rooms.getRoom(data.PlayerRoomNo)
+        roomJ.Players.find(p=>p.socketID===socket.id).ChangePlayerState()
+        io.in(data.PlayerRoomNo).emit('recive_State',roomJ)
+    })
+
     socket.on('send_message',(data)=>{
         console.log(`Send_Message the messge is ${data.Message} to the room number ${data.PlayerRoomNo}`)
         io.in(data.PlayerRoomNo).emit("receive_message",data)
