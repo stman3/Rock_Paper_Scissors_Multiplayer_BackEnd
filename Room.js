@@ -32,6 +32,9 @@ class Room{
             console.log(this.Players)
         }
     }
+    ChangeState(){
+        this.RoomState=!this.RoomState
+    }
    
 
 }

@@ -25,14 +25,28 @@ io.on('connection',(socket)=>{
     clientNo++
 
     socket.on("join_room",(data)=>{
-        socket.join(data.newPlayer.roomNo)
-        rooms.joinRoom(data.newPlayer.roomNo,socket.id,data.newPlayer.PlayerName,data.newPlayer.playerPoint,data.newPlayer.playerState)
-        const roomJ= rooms.getRoom(data.newPlayer.roomNo)
-        const playerj = roomJ.Players.find(p=>p.socketID===socket.id)
-        console.log(roomJ.Players)
-        socket.emit("getplayer",playerj)
-
-        io.in(data.newPlayer.roomNo).emit("PlayerRoom",roomJ)
+        const checkRoomExsist=rooms.roomExsist(data.newPlayer.roomNo)
+        if(checkRoomExsist){
+           const checkRoomStae= rooms.getRoom(data.newPlayer.roomNo).RoomState
+           if(checkRoomStae){
+            socket.join(data.newPlayer.roomNo)
+            rooms.joinRoom(data.newPlayer.roomNo,socket.id,data.newPlayer.PlayerName,data.newPlayer.playerPoint,data.newPlayer.playerState)
+            const roomJ= rooms.getRoom(data.newPlayer.roomNo)
+            const playerj = roomJ.Players.find(p=>p.socketID===socket.id)
+            socket.emit("getplayer",playerj)
+            io.in(data.newPlayer.roomNo).emit("PlayerRoom",roomJ)
+           }else{
+            socket.emit("getplayer",false)
+           }
+        }
+        else{
+            socket.join(data.newPlayer.roomNo)
+            rooms.joinRoom(data.newPlayer.roomNo,socket.id,data.newPlayer.PlayerName,data.newPlayer.playerPoint,data.newPlayer.playerState)
+            const roomJ= rooms.getRoom(data.newPlayer.roomNo)
+            const playerj = roomJ.Players.find(p=>p.socketID===socket.id)
+            socket.emit("getplayer",playerj)
+            io.in(data.newPlayer.roomNo).emit("PlayerRoom",roomJ)
+        }
 
     })
 

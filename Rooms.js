@@ -10,6 +10,7 @@ class Rooms{
         if(this.rooms.some(r=>r.getRoomNO()===RoomNumber)){
             const room = this.rooms.find(r=>r.getRoomNO()===RoomNumber)
             room.addPlayer(socketID,PlayerName,"player",playerPoint,playerState)
+            room.ChangeState()
         }
         else{
             this.createRoom(socketID,RoomNumber,PlayerName,playerPoint,playerState)
@@ -17,7 +18,7 @@ class Rooms{
     }
 
     createRoom(socketID,RoomNumber,PlayerName,playerPoint,playerState){
-        this.rooms.push(new Room(RoomNumber,"open"))
+        this.rooms.push(new Room(RoomNumber,true))
         const room = this.rooms.find(r=>r.getRoomNO()===RoomNumber)
         room.addPlayer(socketID,PlayerName,"admin",playerPoint,playerState)
     }
@@ -45,6 +46,11 @@ class Rooms{
 
     deleteRoom(RoomNumber){
         this.rooms = this.rooms.filter(r=>r.getRoomNO()!==RoomNumber)
+    }
+
+    roomExsist(RoomNumber){
+        const roomExsist= this.rooms.some(r=>r.getRoomNO()===RoomNumber)
+        return roomExsist
     }
 
  
