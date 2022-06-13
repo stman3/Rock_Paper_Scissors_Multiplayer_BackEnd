@@ -61,6 +61,12 @@ io.on('connection',(socket)=>{
         io.in(data.PlayerRoomNo).emit("receive_message",data)
     })
 
+    socket.on('send_StartRoom',(data)=>{
+        io.in(data.PlayerRoomNo).emit("receive_start_Room",data)
+    })
+
+
+
 
     socket.on("disconnect",()=>{
         console.log(`socket ${socket.id} disconnected`)
