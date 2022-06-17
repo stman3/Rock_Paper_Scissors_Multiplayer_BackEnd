@@ -56,6 +56,8 @@ io.on('connection',(socket)=>{
         io.in(data.PlayerRoomNo).emit('recive_State',roomJ)
     })
 
+    
+
     socket.on('send_message',(data)=>{
         console.log(`Send_Message the messge is ${data.Message} to the room number ${data.PlayerRoomNo}`)
         io.in(data.PlayerRoomNo).emit("receive_message",data)
@@ -65,6 +67,10 @@ io.on('connection',(socket)=>{
         io.in(data.PlayerRoomNo).emit("receive_start_Room",data)
     })
 
+
+    socket.on('send_Player_Index',(data)=>{
+        console.log(`The Player Index is ${data.Message} to the room number ${data.PlayerRoomNo}`)
+    })
 
 
 
