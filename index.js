@@ -72,6 +72,9 @@ io.on('connection',(socket)=>{
         console.log(`The Player Index is ${data.PlayerCh} to the room number ${data.PlayerRoomNo}`)
         io.in(data.PlayerRoomNo).emit("receive_Player_Ch",data.PlayerCh)
     })
+    socket.on('send_Restart',(data)=>{
+        io.in(data.PlayerRoomNo).emit("receive_Restart",data.PlayerCh)
+    })
 
 
 
